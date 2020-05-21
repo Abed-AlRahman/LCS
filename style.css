@@ -131,6 +131,12 @@ header{
     flex-direction: column !important;
 
 }
+#buttons{
+    margin: 1% auto;
+}
+#text_inputs{
+    margin: 1% auto;
+}
 }
 
 
