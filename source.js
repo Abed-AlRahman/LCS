@@ -1,6 +1,7 @@
 var text1, text2;
 var functionsCalls = [];
 var Interval;
+var fakeInterval;
 
 function animationsCaller() {
     if (functionsCalls.length > 0) {
@@ -11,6 +12,17 @@ function animationsCaller() {
         clearInterval(Interval);
     }
 }
+
+function fakeAnimationsCaller() {
+    if (functionsCalls.length > 0) {
+        functionsCalls[0]();
+        functionsCalls.splice(0, 1);
+    }
+    else {
+        clearInterval(fakeInterval);
+    }
+}
+
 //then, store when you create them
 
 //console.log(LCS("ass like that","The way you move it"))
@@ -98,6 +110,26 @@ function last(x, y, incommon) {
             }
 
         });
+
+}
+
+function last2(x, y, incommon) {
+
+            document.getElementById(`box${x}_${y}`).classList.remove("checked", "current")
+            void document.getElementById(`box${x}_${y}`).offsetWidth;
+            document.getElementById(`box${x}_${y}`).classList.add("visited-box");
+
+            if (!(x == 0 || y == 0) && incommon == true) {
+                var character = document.createElement("div");
+                character.innerHTML = text1[y - 1];
+                document.getElementById("result").prepend(character);
+                character.style.setProperty('display', 'inline-block');
+                character.style.setProperty('--animate-duration', `${(document.getElementById("speed").value / 6)}s`);
+                character.style.setProperty('--animation-delay', `${(document.getElementById("speed").value / 6) + 1}s`);
+                character.style.setProperty('transform', 'translateZ(0)');
+
+                character.classList.add('animate__animated', "animate__slideInRight");
+            }
 
 }
 
@@ -218,9 +250,9 @@ function fillText1(l1, text1) {
 
 function LCS() {
     clearInterval(Interval);
+    clearInterval(fakeInterval);
     functionsCalls = [];
     document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
-    timeouts = [];
     document.getElementById("grid").innerHTML = '';
     text1 = document.getElementById("text1").value.toLowerCase()
     text2 = document.getElementById("text2").value.toLowerCase()
@@ -333,29 +365,32 @@ function LCS() {
     }
 
     Interval = setInterval(animationsCaller, (document.getElementById("speed").value / 6)*1000)
-
-    return DP_table[l2][l1];
 }
 
 function visualize() {
-    document.getElementById("grid").style.display="inline";
-    var old_rows = document.getElementsByClassName("row")
-    while (old_rows.length > 0) {
-        old_rows[0].remove()
-    }
-    var text1 = document.getElementById("text1").value
-    var text2 = document.getElementById("text2").value
+    clearInterval(Interval);
+    clearInterval(fakeInterval);
+    functionsCalls = [];
+    document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
+    document.getElementById("grid").innerHTML = '';
+    text1 = document.getElementById("text1").value.toLowerCase()
+    text2 = document.getElementById("text2").value.toLowerCase()
     var l1 = text1.length
     var l2 = text2.length
     // finding their lengths
     console.log(`${text1} length is ${l1} and ${text2} len is ${l2}`)
     if (l1 == 0 || l2 == 0) {
-        console.log(Math.abs(l1 - l2))
         return 0;
-    }//If a string is empty then we return the numbre of letters in the other one
-
+    }//If a string is empty then we return the number of letters in the other one
+    document.getElementById("grid").style.display="block"
+    document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft");
+    document.getElementsByClassName("code")[0].style.display="none"
+    
     var DP_table = new Array(l2 + 1);
 
+    //filling the j row
+    fillJ(l1);
+    fillText1(l1, text1);
     for (var i = 0; i < DP_table.length; i++) {
         var new_row = document.createElement("div");
         new_row.className = "row";
@@ -365,20 +400,40 @@ function visualize() {
         DP_table[i] = new Array(l1 + 1);
     }
 
-
     DP_table[0][0] = 0;
     document.getElementById("inner0_0").innerHTML = "0";
+    document.getElementById(`inner0_0`).classList.add("innered");
     //Converting a space to space needs no operations
+
+    for (let s = 0; s <= l2; s++) {
+        let row = document.getElementById(`row${s}`).childNodes
+        let I = row[0]
+        I.id = `i_${s}`
+        I.childNodes[0].innerHTML = s
+        I.childNodes[0].classList.add("innered")
+        I.style.background = "transparent";
+        I.style.color = "black";
+
+        let L = row[1]
+        L.style.background = "transparent";
+        L.style.color = "black";
+        if (s > 0) {
+            L.id = `L2_${s - 1}`
+            L.childNodes[0].innerHTML = text2[s - 1];
+            L.childNodes[0].classList.add("innered")
+        }
+    }
 
     for (var x = 1; x <= l1; x++) {
         DP_table[0][x] = 0;
-        console.log(x)
         document.getElementById(`inner0_${x}`).innerHTML = "0";
+        document.getElementById(`inner0_${x}`).classList.add("innered");
     }
     //Filling the first row with number of opeartions needed to convert to space
     for (var x = 1; x <= l2; x++) {
         DP_table[x][0] = 0;
         document.getElementById(`inner${x}_0`).innerHTML = "0";
+        document.getElementById(`inner${x}_0`).classList.add("innered");
     }
     //Filling the first column with number of operations needed to fill the space with letters
 
@@ -393,25 +448,29 @@ function visualize() {
             }
 
             document.getElementById(`inner${i}_${j}`).innerHTML = DP_table[i][j];
+            document.getElementById(`inner${i}_${j}`).classList.add("innered");
         }
     }
 
-    console.log(DP_table)
 
-    var answer = ""
 
     var i = l2, j = l1;
 
     while (i >= 0 && j >= 0) {
-        document.getElementById(`box${i}_${j}`).className = "visited-box"
-        if (i == 0 || j == 0)
+
+        if (i == 0 || j == 0) {
+            last2(i, j, false);
             break;
+        }
         if (DP_table[i][j] != Math.max(DP_table[i - 1][j], DP_table[i][j - 1])) {
-            answer = text1[j - 1] + answer;
+            //answer = text1[j - 1] + answer;
+            last2(i, j, true);
             i--;
             j--;
         }
         else {
+            last2(i, j, false);
+
             if (DP_table[i][j] == DP_table[i - 1][j]) {
                 i--;
             }
@@ -420,9 +479,5 @@ function visualize() {
             }
         }
     }
-    console.log(answer)
-    document.getElementById("result").innerHTML = answer;
-
-    return DP_table[l2][l1];
 
 }
