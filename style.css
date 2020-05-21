@@ -99,12 +99,26 @@ animation-fill-mode: forwards;
 
 #result{
     text-align: center;
+    display:none;
 }
 
 #thelcs{
-    display: none !important;
+    display: inline;
+    font-size: 20px;
+    font-weight: 600;
 }
-
+#letters{
+    display: inline;
+    font-size: 20px;
+    font-weight: 900;
+}
+#letters p{
+    margin: auto 2px;
+}
+#desc{
+    font-size: 40px;
+    text-align: center;
+}
 #text_inputs{
     margin-right: 20px;
 }

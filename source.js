@@ -18,9 +18,6 @@ function animationsCaller() {
     }
 }
 
-//then, store when you create them
-
-//console.log(LCS("ass like that","The way you move it"))
 function changer() {
     let root = document.documentElement;
     let speed = (document.getElementById("speed").value / 6);
@@ -95,7 +92,7 @@ function last(x, y, incommon) {
             if (!(x == 0 || y == 0) && incommon == true) {
                 var character = document.createElement("div");
                 character.innerHTML = text1[y - 1];
-                document.getElementById("result").prepend(character);
+                document.getElementById("letters").prepend(character);
                 character.style.setProperty('display', 'inline-block');
                 character.style.setProperty('--animate-duration', `${(document.getElementById("speed").value / 6)}s`);
                 character.style.setProperty('--animation-delay', `${(document.getElementById("speed").value / 6) + 1}s`);
@@ -117,7 +114,7 @@ function last2(x, y, incommon) {
             if (!(x == 0 || y == 0) && incommon == true) {
                 var character = document.createElement("div");
                 character.innerHTML = text1[y - 1];
-                document.getElementById("result").prepend(character);
+                document.getElementById("letters").prepend(character);
                 character.style.setProperty('display', 'inline-block');
                 character.style.setProperty('--animate-duration', `${(document.getElementById("speed").value / 6)}s`);
                 character.style.setProperty('--animation-delay', `${(document.getElementById("speed").value / 6) + 1}s`);
@@ -246,22 +243,27 @@ function fillText1(l1, text1) {
 function LCS() {
     clearInterval(Interval);
     functionsCalls = [];
-    document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
+
     document.getElementById("grid").innerHTML = '';
     text1 = document.getElementById("text1").value.toLowerCase()
     text2 = document.getElementById("text2").value.toLowerCase()
     var l1 = text1.length
     var l2 = text2.length
-    // finding their lengths
+
     console.log(`${text1} length is ${l1} and ${text2} len is ${l2}`)
     if (l1 == 0 || l2 == 0) {
         return 0;
-    }//If a string is empty then we return the number of letters in the other one
+    }
     document.getElementById("grid").style.display="block"
     document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft");
     document.getElementsByClassName("code")[0].style.display="block"
     document.getElementsByClassName("code")[0].classList.add("animate__animated","animate__slideInRight");
     
+    document.getElementById("result").style.display="block"
+    document.getElementById("letters").innerHTML = '';
+
+    document.getElementById("desc").style.display="none"
+
     document.getElementById("text1").disabled = true;
     document.getElementById("text2").disabled = true;
     document.getElementById("viso").disabled = true;
@@ -269,7 +271,6 @@ function LCS() {
 
     var DP_table = new Array(l2 + 1);
 
-    //filling the j row
     fillJ(l1);
     fillText1(l1, text1);
     for (var i = 0; i < DP_table.length; i++) {
@@ -284,7 +285,6 @@ function LCS() {
     DP_table[0][0] = 0;
     document.getElementById("inner0_0").innerHTML = "0";
     document.getElementById(`inner0_0`).classList.add("innered");
-    //Converting a space to space needs no operations
 
     for (let s = 0; s <= l2; s++) {
         let row = document.getElementById(`row${s}`).childNodes
@@ -310,13 +310,11 @@ function LCS() {
         document.getElementById(`inner0_${x}`).innerHTML = "0";
         document.getElementById(`inner0_${x}`).classList.add("innered");
     }
-    //Filling the first row with number of opeartions needed to convert to space
     for (var x = 1; x <= l2; x++) {
         DP_table[x][0] = 0;
         document.getElementById(`inner${x}_0`).innerHTML = "0";
         document.getElementById(`inner${x}_0`).classList.add("innered");
     }
-    //Filling the first column with number of operations needed to fill the space with letters
 
     for (var i = 1; i <= l2; i++) {
         for (var j = 1; j <= l1; j++) {
@@ -346,7 +344,6 @@ function LCS() {
             break;
         }
         if (DP_table[i][j] != Math.max(DP_table[i - 1][j], DP_table[i][j - 1])) {
-            //answer = text1[j - 1] + answer;
             last(i, j, true);
             i--;
             j--;
@@ -369,18 +366,18 @@ function LCS() {
 function visualize() {
     clearInterval(Interval);
     functionsCalls = [];
-    document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
+
     document.getElementById("grid").innerHTML = '';
     text1 = document.getElementById("text1").value.toLowerCase()
     text2 = document.getElementById("text2").value.toLowerCase()
     var l1 = text1.length
     var l2 = text2.length
-    // finding their lengths
+    
     console.log(`${text1} length is ${l1} and ${text2} len is ${l2}`)
     if (l1 == 0 || l2 == 0) {
         return 0;
-    }//If a string is empty then we return the number of letters in the other one
-    
+    }
+
     document.getElementById("text1").disabled = false;
     document.getElementById("text2").disabled = false;
     document.getElementById("viso").disabled = false;
@@ -389,10 +386,14 @@ function visualize() {
     document.getElementById("grid").style.display="block"
     document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft");
     document.getElementsByClassName("code")[0].style.display="none"
+
+    document.getElementById("result").style.display="block";
+    document.getElementById("letters").innerHTML = '';
+    
+    document.getElementById("desc").style.display="none"
     
     var DP_table = new Array(l2 + 1);
 
-    //filling the j row
     fillJ(l1);
     fillText1(l1, text1);
     for (var i = 0; i < DP_table.length; i++) {
@@ -407,7 +408,6 @@ function visualize() {
     DP_table[0][0] = 0;
     document.getElementById("inner0_0").innerHTML = "0";
     document.getElementById(`inner0_0`).classList.add("innered");
-    //Converting a space to space needs no operations
 
     for (let s = 0; s <= l2; s++) {
         let row = document.getElementById(`row${s}`).childNodes
@@ -433,13 +433,11 @@ function visualize() {
         document.getElementById(`inner0_${x}`).innerHTML = "0";
         document.getElementById(`inner0_${x}`).classList.add("innered");
     }
-    //Filling the first row with number of opeartions needed to convert to space
     for (var x = 1; x <= l2; x++) {
         DP_table[x][0] = 0;
         document.getElementById(`inner${x}_0`).innerHTML = "0";
         document.getElementById(`inner${x}_0`).classList.add("innered");
     }
-    //Filling the first column with number of operations needed to fill the space with letters
 
     for (var i = 1; i <= l2; i++) {
         for (var j = 1; j <= l1; j++) {
@@ -467,7 +465,6 @@ function visualize() {
             break;
         }
         if (DP_table[i][j] != Math.max(DP_table[i - 1][j], DP_table[i][j - 1])) {
-            //answer = text1[j - 1] + answer;
             last2(i, j, true);
             i--;
             j--;
