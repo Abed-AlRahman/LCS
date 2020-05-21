@@ -1,25 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="source.js"></script>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </head>
-    <div id="input_area">
-        <input id ="text1" type="text" placeholder="text1">
-        <input id = "text2" type="text" placeholder="text2">
-        <button onclick="LCS()">Calculate</button>
-    </div>
-    <body>
-        <h1 id="result"></h1>
-        <div id="grid">
-            
+<head>
+    <script src="source.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <header>
+        <p>Longest Common Subsequence Algorithm
+        <p>Visualization</p>
+        </p>
+    </header>
+    <div class="container inputs">
+        <div id="text_inputs">
+            <input id="text1" type="text" placeholder="text1">
+            <input id="text2" type="text" placeholder="text2">
         </div>
-    </body>
+        <button class="btn btn-light btn-sm cbtn" onclick="LCS()">Calculate</button>
+        <button class="btn btn-light btn-sm cbtn" onclick="visualize()">Visualize</button>
 
-    <a href='https://www.symptoma.ro/'>Căutare boli</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=c75a2d1635445ce3966c7914fefee1397f4adc99'></script>
-    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/674007/t/5"></script>
+    </div>
+    <div id="speedy">
+        <p>Speed</p>
+        <input type="range" id="speed" class="slider" name="points" min="1" max="10" onchange="changer()">
+    </div>
+    <div id="result"></div>
+    <div id="internal_parts">
+        <div id="grid" class="teez">
+        </div>
+        <div class="code">
+            <ul>
+                <li>
+                    <h4>Dynamic Programming</h4>
+                </li>
+                <li>for (var i = 1; i <= l2; i++)</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;for (var j = 1; j <= l1; j++)</li>
+
+                <li id="firstif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (text1[j - 1] == text2[i - 1])</li>
+                <li id="firstifline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DP[i][j] =
+                    DP[i - 1][j - 1] + 1;</li>
+
+                <li id="firstelse">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</li>
+                <li id="firstelseline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DP[i][j]
+                    = max(DP[i - 1][j], DP[i][j - 1]);</li>
+            </ul>
+        </div>
+    </div>
+    <footer>Designed by: Abed AlRAhman Naser.</footer>
+</body>
+
+
 </html>
