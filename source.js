@@ -94,7 +94,7 @@ function last(x, y, incommon) {
                 character.style.setProperty('--animation-delay', `${(document.getElementById("speed").value / 6) + 1}s`);
                 character.style.setProperty('transform', 'translateZ(0)');
 
-                character.classList.add('animate__animated', "animate__slideInLeft");
+                character.classList.add('animate__animated', "animate__slideInRight");
             }
 
         });
@@ -231,7 +231,11 @@ function LCS() {
     if (l1 == 0 || l2 == 0) {
         return 0;
     }//If a string is empty then we return the number of letters in the other one
-
+    document.getElementById("grid").style.display="block"
+    document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft ");
+    document.getElementsByClassName("code")[0].style.display="block"
+    document.getElementsByClassName("code")[0].classList.add("animate__animated","animate__slideInRight");
+    
     var DP_table = new Array(l2 + 1);
 
     //filling the j row
@@ -338,7 +342,7 @@ function LCS() {
 }
 
 function visualize() {
-
+    document.getElementById("grid").style.display="inline";
     var old_rows = document.getElementsByClassName("row")
     while (old_rows.length > 0) {
         old_rows[0].remove()

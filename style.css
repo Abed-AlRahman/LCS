@@ -12,6 +12,7 @@ body{
 }
 #grid {
     margin: 0 auto 3% auto;
+    display: none;
     width: 80vw;
     max-width: 60vh;
 /*    height: 60vw;
@@ -100,8 +101,16 @@ animation-fill-mode: forwards;
     text-align: center;
 }
 
+#thelcs{
+    display: none !important;
+}
+
 #text_inputs{
     margin-right: 20px;
+}
+#text_inputs input{
+    width: 120px;
+    margin: auto 5px;
 }
 .cbtn{
     margin: 0 10px;
@@ -131,6 +140,7 @@ header{
     width: 350px;
     margin: 0 auto;
     font-weight: 600;
+    display: none;
 }
 
 
@@ -161,7 +171,6 @@ header{
 
 #result p{
     display: inline;
-
 }
 
 #internal_parts{
@@ -173,13 +182,17 @@ header{
 
 /* slider styling*/
 #speedy{
+    margin: 2% 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     
 }
-
+#speedy p{
+    margin: auto 5px;
+    font-size: 20px;
+}
 .slider {
     -webkit-appearance: none;
     width: 300px;
@@ -188,6 +201,11 @@ header{
     background: white;
     outline: none;
     border: lightgray 1px solid;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
   }
   
   .slider::-webkit-slider-thumb {
