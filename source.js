@@ -232,7 +232,7 @@ function LCS() {
         return 0;
     }//If a string is empty then we return the number of letters in the other one
     document.getElementById("grid").style.display="block"
-    document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft ");
+    document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft");
     document.getElementsByClassName("code")[0].style.display="block"
     document.getElementsByClassName("code")[0].classList.add("animate__animated","animate__slideInRight");
     
