@@ -118,8 +118,10 @@ animation-fill-mode: forwards;
 header{
     background-color: #6b7a8f;
     color: white;
-    font-size: 1em;
+    font-size: 2em;
     text-align: center;
+    margin: 2%;
+    padding: 0.4% 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -230,4 +232,8 @@ header{
     border-radius: 50%;
     background: #851400;
     cursor: pointer;
+  }
+
+  footer{
+      margin: 2% ;
   }

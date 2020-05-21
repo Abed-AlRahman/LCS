@@ -305,7 +305,6 @@ function LCS() {
     }
 
 
-    //var answer = ""
 
     var i = l2, j = l1;
 
@@ -332,11 +331,8 @@ function LCS() {
             }
         }
     }
-    //console.log(answer)
-    //document.getElementById("result").innerHTML = answer;
-    Interval = setInterval(animationsCaller, 1000)
 
-    var c = document.getElementById("row0").childNodes;
+    Interval = setInterval(animationsCaller, (document.getElementById("speed").value / 6)*1000)
 
     return DP_table[l2][l1];
 }
