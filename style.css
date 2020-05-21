@@ -147,14 +147,13 @@ header{
     flex-direction: row;
     width: 350px;
     margin: 0 auto;
-    font-weight: 600;
+    font-size: 1rem;
     display: none;
 }
 
 
 .code ul{
     list-style-type: none;
-
 }
 
 .code li{

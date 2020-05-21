@@ -1,7 +1,6 @@
 var text1, text2;
 var functionsCalls = [];
 var Interval;
-var fakeInterval;
 
 function animationsCaller() {
     if (functionsCalls.length > 0) {
@@ -9,17 +8,13 @@ function animationsCaller() {
         functionsCalls.splice(0, 1);
     }
     else {
-        clearInterval(Interval);
-    }
-}
 
-function fakeAnimationsCaller() {
-    if (functionsCalls.length > 0) {
-        functionsCalls[0]();
-        functionsCalls.splice(0, 1);
-    }
-    else {
-        clearInterval(fakeInterval);
+        clearInterval(Interval);
+
+        document.getElementById("text1").disabled = false;
+        document.getElementById("text2").disabled = false;
+        document.getElementById("viso").disabled = false;
+        document.getElementById("calco").innerHTML="Calculate"
     }
 }
 
@@ -250,7 +245,6 @@ function fillText1(l1, text1) {
 
 function LCS() {
     clearInterval(Interval);
-    clearInterval(fakeInterval);
     functionsCalls = [];
     document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
     document.getElementById("grid").innerHTML = '';
@@ -268,6 +262,11 @@ function LCS() {
     document.getElementsByClassName("code")[0].style.display="block"
     document.getElementsByClassName("code")[0].classList.add("animate__animated","animate__slideInRight");
     
+    document.getElementById("text1").disabled = true;
+    document.getElementById("text2").disabled = true;
+    document.getElementById("viso").disabled = true;
+    document.getElementById("calco").innerHTML="Skip"
+
     var DP_table = new Array(l2 + 1);
 
     //filling the j row
@@ -369,7 +368,6 @@ function LCS() {
 
 function visualize() {
     clearInterval(Interval);
-    clearInterval(fakeInterval);
     functionsCalls = [];
     document.getElementById("result").innerHTML = '';    //quick reset of the timer array you just cleared
     document.getElementById("grid").innerHTML = '';
@@ -382,6 +380,12 @@ function visualize() {
     if (l1 == 0 || l2 == 0) {
         return 0;
     }//If a string is empty then we return the number of letters in the other one
+    
+    document.getElementById("text1").disabled = false;
+    document.getElementById("text2").disabled = false;
+    document.getElementById("viso").disabled = false;
+    document.getElementById("calco").innerHTML="Calculate"
+
     document.getElementById("grid").style.display="block"
     document.getElementById("grid").classList.add("animate__animated","animate__slideInLeft");
     document.getElementsByClassName("code")[0].style.display="none"
