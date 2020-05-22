@@ -24,3 +24,5 @@ The Complexity of this algorithm using the Bottom-Up approach is O(m*n) where m 
 [Animate.css](https://animate.style/)
 
 [Responsive Grid of Squares](http://bluecaret.com/blog/responsive-grid-of-squares) (I edited it to fit with my project)
+
+[Range slider CSS styling](https://www.w3schools.com/howto/howto_js_rangeslider.asp)
