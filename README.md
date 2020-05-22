@@ -13,6 +13,8 @@ The Complexity of this algorithm using the Bottom-Up approach is O(m*n) where m 
 
 ### A preview of the project: 
 
+![Preview](https://i.imgur.com/eKfSKZu.gif)
+
 ---
 
 ### External code & libraries:
